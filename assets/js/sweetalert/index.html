@@ -1,0 +1,24 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <button type="button" id="alert">SweetAlert</button>
+</body>
+</html>
+
+<script>
+    const tombol_alert = document.querySelector('#alert');
+    tombol_alert.addEventListener('click', function(){
+        Swal.fire({
+            title: 'Error!',
+            text: 'Do you want to continue',
+            icon: 'error',
+            confirmButtonText: 'Cool'
+        })
+    });
+</script>
+    <script src="package/dist/sweetalert2.all.min.js"></script>
