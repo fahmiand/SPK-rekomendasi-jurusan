@@ -54,7 +54,7 @@ class ControllerBobot extends CI_Controller
         $this->form_validation->set_rules('nilai_bobot', 'nilai_bobot', 'required|numeric|less_than_equal_to[5]');
         $this->form_validation->set_message('required', '* {field} Harus diisi');
         $this->form_validation->set_message('numeric', '* {field} Harus berupa angka');
-        $this->form_validation->set_message('less_than_equal_to', '* {field} Harus lebih dari 5');
+        $this->form_validation->set_message('less_than_equal_to', 'nilai tidak boleh lebih dari 5');
 
         if ($this->form_validation->run() == FALSE) {
             $this->insert_bobot();

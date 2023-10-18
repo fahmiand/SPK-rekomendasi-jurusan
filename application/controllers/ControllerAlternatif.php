@@ -48,8 +48,10 @@ class ControllerAlternatif extends CI_Controller
 
     public function insert_alternatif_action()
     {
-        $this->form_validation->set_rules('jurusan', 'jurusan', 'required');
+        $this->form_validation->set_rules('kode_jurusan', 'Kode Jurusan', 'required|trim');
+        $this->form_validation->set_rules('jurusan', 'jurusan', 'required|trim');
         $this->form_validation->set_message('required', '* {field} Harus diisi');
+        $this->form_validation->set_message('trim', 'input yang dimasukkan tidak valid');
 
         if ($this->form_validation->run() == FALSE) {
             $this->insert_alternatif();
@@ -87,17 +89,26 @@ class ControllerAlternatif extends CI_Controller
 
     public function edit_alternatif_action()
     {
-        $id_alternatif  = $this->input->post("id_alternatif");
+        $this->form_validation->set_rules('kode_jurusan', 'Kode Jurusan', 'required|trim');
+        $this->form_validation->set_rules('jurusan', 'jurusan', 'required|trim');
+        $this->form_validation->set_message('required', '* {field} Harus diisi');
+        $this->form_validation->set_message('trim', 'input yang dimasukkan tidak valid');
 
-        $data = [
-            'kode_jurusan'     => $this->input->post("kode_jurusan"),
-            'jurusan'          => $this->input->post("jurusan"),
-        ];
+        if ($this->form_validation->run() == FALSE) {
+            $this->edit($this->input->post("id_alternatif"));
+        } else {
+            $id_alternatif  = $this->input->post("id_alternatif");
 
-        $this->Alternatif->update_alternatif($id_alternatif, $data);
+            $data = [
+                'kode_jurusan'     => $this->input->post("kode_jurusan"),
+                'jurusan'          => $this->input->post("jurusan"),
+            ];
 
-        $this->session->set_flashdata("flash_message", "Berhasil update data alternatif.");
-        redirect(site_url("ControllerAlternatif"));
+            $this->Alternatif->update_alternatif($id_alternatif, $data);
+
+            $this->session->set_flashdata("flash_message", "Berhasil update data alternatif.");
+            redirect(site_url("ControllerAlternatif"));
+        }
     }
 
     public function hapus($id)

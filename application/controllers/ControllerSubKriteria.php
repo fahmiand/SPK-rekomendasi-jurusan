@@ -157,41 +157,21 @@ class ControllerSubKriteria extends CI_Controller
 
     public function edit_sub_kriteria_action()
     {
-        $this->form_validation->set_rules('kode_jurusan', 'Jurusan', 'required');
-        $this->form_validation->set_rules('c1', 'C1', 'required');
-        $this->form_validation->set_rules('c2', 'C2', 'required');
-        $this->form_validation->set_rules('c3', 'C3', 'required');
-        $this->form_validation->set_rules('c4', 'C4', 'required');
-        $this->form_validation->set_rules('c5', 'C5', 'required|numeric|less_than_equal_to[100]', [
-            'numeric' => 'Nilai harus berupa angka',
-            'greater_than' => 'Nilai minimal 0',
-            'less_than_equal_to' => 'Nilai maksimal 100'
-        ]);
-        $this->form_validation->set_rules('c6', 'C6', 'required|numeric|less_than_equal_to[100]', [
-            'numeric' => 'Nilai harus berupa angka',
-            'greater_than' => 'Nilai minimal 0',
-            'less_than_equal_to' => 'Nilai maksimal 100'
-        ]);
-        $this->form_validation->set_rules('c7', 'C7', 'required|numeric|less_than_equal_to[100]', [
-            'numeric' => 'Nilai harus berupa angka',
-            'greater_than' => 'Nilai minimal 0',
-            'less_than_equal_to' => 'Nilai maksimal 100'
-        ]);
-        $this->form_validation->set_rules('c8', 'C8', 'required|numeric|less_than_equal_to[100]', [
-            'numeric' => 'Nilai harus berupa angka',
-            'greater_than' => 'Nilai minimal 0',
-            'less_than_equal_to' => 'Nilai maksimal 100'
-        ]);
-        $this->form_validation->set_rules('c9', 'C9', 'required|numeric|less_than_equal_to[100]', [
-            'numeric' => 'Nilai harus berupa angka',
-            'greater_than' => 'Nilai minimal 0',
-            'less_than_equal_to' => 'Nilai maksimal 100'
-        ]);
-        $this->form_validation->set_rules('c10', 'C10', 'required|numeric|less_than_equal_to[100]', [
-            'numeric' => 'Nilai harus berupa angka',
-            'greater_than' => 'Nilai minimal 0',
-            'less_than_equal_to' => 'Nilai maksimal 100'
-        ]);
+        $this->form_validation->set_rules('kode_jurusan', 'Jurusan', 'trim|required');
+        $this->form_validation->set_rules('c1', 'C1', 'trim|required');
+        $this->form_validation->set_rules('c2', 'C2', 'trim|required');
+        $this->form_validation->set_rules('c3', 'C3', 'trim|required');
+        $this->form_validation->set_rules('c4', 'C4', 'trim|required');
+        $this->form_validation->set_rules('c5', 'C5', 'trim|required|numeric|less_than_equal_to[100]');
+        $this->form_validation->set_rules('c6', 'C6', 'trim|required|numeric|less_than_equal_to[100]');
+        $this->form_validation->set_rules('c7', 'C7', 'trim|required|numeric|less_than_equal_to[100]');
+        $this->form_validation->set_rules('c8', 'C8', 'trim|required|numeric|less_than_equal_to[100]');
+        $this->form_validation->set_rules('c9', 'C9', 'trim|required|numeric|less_than_equal_to[100]');
+        $this->form_validation->set_rules('c10', 'C10', 'trim|required|numeric|less_than_equal_to[100]');
+        $this->form_validation->set_message('required', '* {field} Harus diisi');
+        $this->form_validation->set_message('numeric', '* {field} Harus berupa angka');
+        $this->form_validation->set_message('less_than_equal_to', 'Nilai Tidak boleh Lebih dari 100');
+        $this->form_validation->set_message('trim', 'input yang dimasukkan tidak valid');
 
         $kd  = $this->input->post("kd");
         if ($this->form_validation->run() == FALSE) {
