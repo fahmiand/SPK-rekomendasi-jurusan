@@ -84,83 +84,6 @@
     </div>
 </section>
 
-<?php if (!empty($this->session->nilaiS)) { ?>
-    <section class="content">
-        <div class="container-fluid">
-            <div class="row">
-                <div class="col-12">
-                    <div class="card">
-                        <div class="card-header">
-                            <h3 class="card-title">Hasil Hitung</h3>
-                        </div>
-                        <!-- /.card-header -->
-                        <div class="card-body">
-                            <div class="table-responsive">
-                                <table id="nilaiS" class="table table-striped">
-                                    <thead>
-                                        <tr>
-                                            <th width="5%">No</th>
-                                            <th>Nama</th>
-                                            <th>Kode Jurusan</th>
-                                            <th>S</th>
-                                        </tr>
-                                    </thead>
-                                    <tbody>
-                                        <?php $no = 1; ?>
-                                        <?php foreach ($nilaiS as $value) { ?>
-                                            <tr>
-                                                <td><?= $no++; ?></td>
-                                                <td><?= $value->name ?></td>
-                                                <td><?= $value->kode_jurusan ?></td>
-                                                <td><?= $value->s ?></td>
-                                            </tr>
-                                        <?php } ?>
-                                    </tbody>
-                                </table>
-                            </div>
-                            <div style="margin-top: 15px;">
-                                <a href="<?= site_url('ControllerHasil/sesi_hitung_v') ?>" class="btn btn-primary">Lanjut Proses Hitung Nilai</a>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </div>
-    </section>
-<?php } ?>
-
-<?php if (!empty($this->session->nilaiV)) { ?>
-    <section class="content">
-        <div class="container-fluid">
-            <div class="row">
-                <div class="col-12">
-                    <div class="card">
-                        <div class="card-header">
-                            <h3 class="card-title">Hitung Hasil ( Nilai V )</h3>
-                        </div>
-                        <!-- /.card-header -->
-                        <div class="card-body">
-                            <form class="form-material form-horizontal" method="POST" action="<?= site_url('ControllerHasil/hitung_nilai_v') ?>" enctype="multipart/form-data">
-                                <div class="col-md-12">
-                                    <div class="row">
-                                        <ul class="list-group">
-                                            <li class="list-group-item"><?= $name ?></li>
-                                            <input type="text" name="id" value="<?= $idUser ?>">
-                                        </ul>
-                                    </div>
-                                </div>
-                                <div class="col-md-12" style="margin-top: 15px;">
-                                    <button type="submit" class="btn btn-primary">Lanjutkan Hitung</button>
-                                </div>
-                            </form>
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </div>
-    </section>
-<?php } ?>
-
 <?php if (!empty($this->session->data_siswa)) { ?>
     <?php
     $idUser = $this->session->data_siswa["idUser"];
@@ -186,11 +109,9 @@
                                     <table class="table table-bordered">
                                         <tbody>
                                             <tr>
-                                                <td style="text-align: center; background-color:antiquewhite;">Vektor S <?= $value->kode_jurusan ?></td>
-                                                <td style="text-align: center; background-color:antiquewhite;">Vektor V <?= $value->kode_jurusan ?></td>
+                                                <td style="text-align: center; background-color:antiquewhite;">Hasil <?= $value->kode_jurusan ?></td>
                                             </tr>
                                             <tr>
-                                                <td style="text-align: center;"><?= $value->s ?></td>
                                                 <td style="text-align: center;"><?= $value->v ?></td>
                                             </tr>
                                         </tbody>
@@ -202,8 +123,6 @@
                             (SELECT jurusan FROM jurusan WHERE proses_hitung.kode_jurusan=jurusan.kode_jurusan)
                             as jurusan FROM proses_hitung WHERE id_user='$idUser' GROUP BY kode_jurusan
                             ORDER BY MAX(v) DESC")->row();
-                            // print_r($rekomendasi_jurusan);die;
-                            // , (SELECT jurusan FROM alternatif as b WHERE b.kode_jurusan=a.kode_jurusan) as hasil_jurusan 
                             ?>
                             <div class="col-md-12">
                                 <div class="alert alert-success alert-dismissible">

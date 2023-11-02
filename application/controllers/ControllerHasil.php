@@ -86,7 +86,6 @@ class ControllerHasil extends CI_Controller
                     'w10'           => $w10,
                     's'             => $nilai_s,
                 ];
-
                 $cekDataProses = $this->db->get_where("proses_hitung", ["id_user" => $idUser, "kode_jurusan" => $value->kode_jurusan])->row();
                 if ($cekDataProses) {
                     $this->db->where("id_user", $idUser);
@@ -96,22 +95,10 @@ class ControllerHasil extends CI_Controller
                     $this->db->insert("proses_hitung", $data);
                 }
             }
-            $data_session = [
-                'nilai_s'          => 'ada',
-            ];
-            $this->session->set_userdata("nilaiS", $data_session);
+            $this->hitung_nilai_v();
 
             redirect(site_url('ControllerHasil'));
         }
-    }
-
-    public function sesi_hitung_v()
-    {
-        $data_session = [
-            'nilai_v'          => 'ada',
-        ];
-        $this->session->set_userdata("nilaiV", $data_session);
-        redirect(site_url('ControllerHasil'));
     }
 
     public function hitung_nilai_v()
