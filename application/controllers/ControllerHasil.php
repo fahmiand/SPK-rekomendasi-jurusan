@@ -39,9 +39,9 @@ class ControllerHasil extends CI_Controller
         $this->form_validation->set_rules('pemasaran', 'Pemasaran', 'trim|required|numeric|less_than_equal_to[100]|greater_than[0]');
         $this->form_validation->set_rules('administrasi_perkantoran', 'Administrasi Perkantoran', 'trim|required|numeric|less_than_equal_to[100]|greater_than[0]');
         $this->form_validation->set_message('required', '* {field} Harus diisi');
-        $this->form_validation->set_message('numeric', '* {field} Harus berupa angka');
-        $this->form_validation->set_message('less_than', 'nilai tidak boleh lebih dari 100');
-        $this->form_validation->set_message('greater_than', 'nilai boleh tidak 0');
+        $this->form_validation->set_message('numeric', 'Harus berupa angka');
+        $this->form_validation->set_message('less_than', 'Nilai Harus kurang dari 100!');
+        $this->form_validation->set_message('greater_than', 'Nilai tidak boleh 0!');
         $this->form_validation->set_message('trim', 'input yang dimasukkan tidak valid');
 
 

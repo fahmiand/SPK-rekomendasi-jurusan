@@ -107,7 +107,21 @@
                             ?>
 
                             <div class="col-md-12">
-                                <table class="table">
+                                <?php foreach ($data_hasil as $value) { ?>
+                                    <div class="col-md-12">
+                                        <table class="table table-bordered">
+                                            <tbody>
+                                                <tr>
+                                                    <td style="text-align: center; background-color:antiquewhite;">Hasil <?= $value->jurusan ?></td>
+                                                </tr>
+                                                <tr>
+                                                    <td style="text-align: center;"><?= $value->v ?></td>
+                                                </tr>
+                                            </tbody>
+                                        </table>
+                                    </div>
+                                <?php } ?>
+                                <!-- <table class="table">
                                     <thead>
                                         <tr>
                                             <td>No.</td>
@@ -126,7 +140,7 @@
                                             </tr>
                                         <?php } ?>
                                     </tbody>
-                                </table>
+                                </table> -->
                             </div>
                             <?php
                             $rekomendasi_jurusan = $this->db->query("SELECT MAX(v) nilai_tertinggi, kode_jurusan,
