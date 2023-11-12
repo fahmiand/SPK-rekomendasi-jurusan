@@ -23,10 +23,25 @@ class ControllerLaporan extends CI_Controller
         $data = [
             'judul' => 'History',
             'user' => $this->user->getUser(),
-            'hasil' => $this->Hasil->getUserHasil($id)
+            'hasil' => $this->Hasil->getUserHasilById($id)
         ];
         $this->load->view('users/templates/header', $data);
         $this->load->view('users/laporan/listLaporan', $data);
         $this->load->view('users/templates/footer');
+    }
+
+    public function indexAdmin()
+    {
+        $data = [
+            'judul' => 'Laporan Hasil',
+            'user' => $this->user->getUser(),
+            'hasil' => $this->Hasil->getUserHasil()
+        ];
+
+        $this->load->view('admin/templates/header', $data);
+        $this->load->view('admin/templates/sider', $data);
+        $this->load->view('admin/templates/topbar', $data);
+        $this->load->view('admin/hasil', $data);
+        $this->load->view('admin/templates/footer', $data);
     }
 }

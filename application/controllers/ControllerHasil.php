@@ -28,20 +28,22 @@ class ControllerHasil extends CI_Controller
 
     public function prosesHitung()
     {
-        $this->form_validation->set_rules('bhs_indo', 'Bahasa Indonesia', 'trim|required|numeric|less_than_equal_to[100]');
-        $this->form_validation->set_rules('bhs_ingris', 'Bahasa Inggris', 'trim|required|numeric|less_than_equal_to[100]');
-        $this->form_validation->set_rules('mtk', 'Matematika', 'trim|required|numeric|less_than_equal_to[100]');
-        $this->form_validation->set_rules('ipa', 'IPA', 'trim|required|numeric|less_than_equal_to[100]');
-        $this->form_validation->set_rules('rekayasa_perangkat_lunak', 'Rekayasa Perangkat Lunak', 'trim|required|numeric|less_than_equal_to[100]');
-        $this->form_validation->set_rules('teknik_komputer_jaringan', 'Teknik Komputer Jaringan', 'trim|required|numeric|less_than_equal_to[100]');
-        $this->form_validation->set_rules('multimedia', 'Multimedia', 'trim|required|numeric|less_than_equal_to[100]');
-        $this->form_validation->set_rules('akuntansi', 'Akuntansi', 'trim|required|numeric|less_than_equal_to[100]');
-        $this->form_validation->set_rules('pemasaran', 'Pemasaran', 'trim|required|numeric|less_than_equal_to[100]');
-        $this->form_validation->set_rules('administrasi_perkantoran', 'Administrasi Perkantoran', 'trim|required|numeric|less_than_equal_to[100]');
+        $this->form_validation->set_rules('bhs_indo', 'Bahasa Indonesia', 'trim|required|numeric|less_than_equal_to[100]|greater_than[0]');
+        $this->form_validation->set_rules('bhs_ingris', 'Bahasa Inggris', 'trim|required|numeric|less_than_equal_to[100]|greater_than[0]');
+        $this->form_validation->set_rules('mtk', 'Matematika', 'trim|required|numeric|less_than_equal_to[100]|greater_than[0]');
+        $this->form_validation->set_rules('ipa', 'IPA', 'trim|required|numeric|less_than_equal_to[100]|greater_than[0]');
+        $this->form_validation->set_rules('rekayasa_perangkat_lunak', 'Rekayasa Perangkat Lunak', 'trim|required|numeric|less_than_equal_to[100]|greater_than[0]');
+        $this->form_validation->set_rules('teknik_komputer_jaringan', 'Teknik Komputer Jaringan', 'trim|required|numeric|less_than_equal_to[100]|greater_than[0]');
+        $this->form_validation->set_rules('multimedia', 'Multimedia', 'trim|required|numeric|less_than_equal_to[100]|greater_than[0]');
+        $this->form_validation->set_rules('akuntansi', 'Akuntansi', 'trim|required|numeric|less_than_equal_to[100]|greater_than[0]');
+        $this->form_validation->set_rules('pemasaran', 'Pemasaran', 'trim|required|numeric|less_than_equal_to[100]|greater_than[0]');
+        $this->form_validation->set_rules('administrasi_perkantoran', 'Administrasi Perkantoran', 'trim|required|numeric|less_than_equal_to[100]|greater_than[0]');
         $this->form_validation->set_message('required', '* {field} Harus diisi');
         $this->form_validation->set_message('numeric', '* {field} Harus berupa angka');
-        $this->form_validation->set_message('less_than_equal_to', 'nilai tidak boleh lebih dari 100');
+        $this->form_validation->set_message('less_than', 'nilai tidak boleh lebih dari 100');
+        $this->form_validation->set_message('greater_than', 'nilai boleh tidak 0');
         $this->form_validation->set_message('trim', 'input yang dimasukkan tidak valid');
+
 
         if ($this->form_validation->run() == false) {
             $this->index();

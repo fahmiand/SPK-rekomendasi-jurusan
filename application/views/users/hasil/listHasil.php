@@ -18,22 +18,22 @@
                                 <div class="row">
                                     <div class="col-md-3">
                                         Bahasa Indonesia
-                                        <input type="number" class="form-control" name="bhs_indo" value="" required>
+                                        <input type="number" class="form-control" name="bhs_indo" value="<?= set_value('bhs_indo') ?>" required>
                                         <span class="text-danger"><?= form_error('bhs_indo') ?></span>
                                     </div>
                                     <div class="col-md-3">
                                         Bahasa Inggris
-                                        <input type="number" class="form-control" name="bhs_ingris" value="" required>
+                                        <input type="number" class="form-control" name="bhs_ingris" value="<?= set_value('bhs_ingris') ?>" required>
                                         <span class="text-danger"><?= form_error('bhs_ingris') ?></span>
                                     </div>
                                     <div class="col-md-3">
-                                        MTK
-                                        <input type="number" class="form-control" name="mtk" value="" required>
+                                        Matematika
+                                        <input type="number" class="form-control" name="mtk" value="<?= set_value('mtk') ?>" required>
                                         <span class="text-danger"><?= form_error('mtk') ?></span>
                                     </div>
                                     <div class="col-md-3">
-                                        IPA
-                                        <input type="number" class="form-control" name="ipa" value="" required>
+                                        Ilmu Pengetahuan Alam
+                                        <input type="number" class="form-control" name="ipa" value="<?= set_value('ipa') ?>" required>
                                         <span class="text-danger"><?= form_error('ipa') ?></span>
                                     </div>
                                 </div>
@@ -41,32 +41,32 @@
                                 <div class="row">
                                     <div class="col-md-3">
                                         jurusan Rekayasa Perangkat Lunak
-                                        <input type="number" class="form-control" name="rekayasa_perangkat_lunak" value="" required>
+                                        <input type="number" class="form-control" name="rekayasa_perangkat_lunak" value="<?= set_value('rekayasa_perangkat_lunak') ?>" required>
                                         <span class="text-danger"><?= form_error('rekayasa_perangkat_lunak') ?></span>
                                     </div>
                                     <div class="col-md-3">
                                         Jurusan Teknik Komputer dan Jaringan
-                                        <input type="number" class="form-control" name="teknik_komputer_jaringan" value="" required>
+                                        <input type="number" class="form-control" name="teknik_komputer_jaringan" value="<?= set_value('teknik_komputer_jaringan') ?>" required>
                                         <span class="text-danger"><?= form_error('teknik_komputer_jaringan') ?></span>
                                     </div>
                                     <div class="col-md-3">
                                         Jurusan Multimedia
-                                        <input type="number" class="form-control" name="multimedia" value="" required>
+                                        <input type="number" class="form-control" name="multimedia" value="<?= set_value('multimedia') ?>" required>
                                         <span class="text-danger"><?= form_error('multimedia') ?></span>
                                     </div>
                                     <div class="col-md-3">
                                         Jurusan Administrasi Perkantoran
-                                        <input type="number" class="form-control" name="administrasi_perkantoran" value="" required>
+                                        <input type="number" class="form-control" name="administrasi_perkantoran" value="<?= set_value('administrasi_perkantoran') ?>" required>
                                         <span class="text-danger"><?= form_error('administrasi_perkantoran') ?></span>
                                     </div>
                                     <div class="col-md-3">
                                         Jurusan Akuntansi
-                                        <input type="number" class="form-control" name="akuntansi" value="" required>
+                                        <input type="number" class="form-control" name="akuntansi" value="<?= set_value('akuntansi') ?>" required>
                                         <span class="text-danger"><?= form_error('akuntansi') ?></span>
                                     </div>
                                     <div class="col-md-3">
                                         Jurusan Pemasaran
-                                        <input type="number" class="form-control" name="pemasaran" value="" required>
+                                        <input type="number" class="form-control" name="pemasaran" value="<?= set_value('pemasaran') ?>" required>
                                         <span class="text-danger"><?= form_error('pemasaran') ?></span>
                                     </div>
                                 </div>
@@ -78,9 +78,9 @@
                 </div>
                 </form>
             </div>
-            <!-- /.card-body -->
+            <!--  /.card-body  -->
         </div>
-        <!-- /.card -->
+        <!--  /.card  -->
     </div>
 </section>
 
@@ -101,23 +101,33 @@
                         <div class="card-body">
                             <?php
                             $idUser = $this->session->data_siswa["idUser"];
-                            $data_hasil = $this->db->query("SELECT * FROM proses_hitung WHERE id_user='$idUser'")->result();
-                            // print_r($data_hasil);die;
+                            $data_hasil = $this->db->query("SELECT proses_hitung.*, jurusan.jurusan FROM proses_hitung
+                                                            LEFT JOIN jurusan on proses_hitung.kode_jurusan = jurusan.kode_jurusan
+                                                            WHERE id_user='$idUser'")->result();
                             ?>
-                            <?php foreach ($data_hasil as $value) { ?>
-                                <div class="col-md-12">
-                                    <table class="table table-bordered">
-                                        <tbody>
+
+                            <div class="col-md-12">
+                                <table class="table">
+                                    <thead>
+                                        <tr>
+                                            <td>No.</td>
+                                            <td>Alternatif</td>
+                                            <td>Hasil</td>
+                                        </tr>
+                                    </thead>
+                                    <tbody>
+                                        <?php $i = 0;
+                                        foreach ($data_hasil as $value) {
+                                            $i++ ?>
                                             <tr>
-                                                <td style="text-align: center; background-color:antiquewhite;">Hasil <?= $value->kode_jurusan ?></td>
+                                                <td><?= $i ?></td>
+                                                <td><?= $value->jurusan ?></td>
+                                                <td><?= $value->v ?></td>
                                             </tr>
-                                            <tr>
-                                                <td style="text-align: center;"><?= $value->v ?></td>
-                                            </tr>
-                                        </tbody>
-                                    </table>
-                                </div>
-                            <?php } ?>
+                                        <?php } ?>
+                                    </tbody>
+                                </table>
+                            </div>
                             <?php
                             $rekomendasi_jurusan = $this->db->query("SELECT MAX(v) nilai_tertinggi, kode_jurusan,
                             (SELECT jurusan FROM jurusan WHERE proses_hitung.kode_jurusan=jurusan.kode_jurusan)

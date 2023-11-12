@@ -21,11 +21,19 @@ class HasilModel extends CI_Model
         return $this->db->get()->result();
     }
 
-    function getUserHasil($id)
+    function getUserHasilById($id)
     {
         $this->db->join('user', 'user.id = hasil.id_user');
         $query = $this->db->get_where('hasil', array('id_user' => $id))->result_array();
         return $query;
+    }
+
+    function getUserHasil()
+    {
+        $this->db->select('*');
+        $this->db->from('hasil');
+        $this->db->join('user', 'hasil.id_user = user.id', 'left');
+        return $this->db->get()->result_array();
     }
 
     function get_data_hasil()
